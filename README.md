@@ -110,7 +110,7 @@ Detailed documentation is split into focused reference pages.
 - [Security](https://github.com/code-hemu/runcodejs/blob/main/docs/security.md) - details on the sandboxed iframe, network access controls, and dialog restrictions
 - [Themes](https://github.com/code-hemu/runcodejs/blob/main/docs/themes.md) - applying built-in themes and creating your own custom editor theme
 - [Examples](https://github.com/code-hemu/runcodejs/blob/main/docs/examples/) - runnable code samples covering common use cases
-- [Changelog](https://github.com/code-hemu/runcodejs/blob/main/docs/changelog.md) - version history and release notes
+- [Changelog](https://github.com/code-hemu/runcodejs/blob/main/changelog.md) - version history and release notes
 
 
 ## License
