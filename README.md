@@ -1,7 +1,12 @@
 <p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-logo.png" width="150"></a></p>
 <h3 align="center">RunCode.js – embed a code editor directly into any webpage.</h3>
 <p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-demo.png" width="709"></a></p>
-
+<p align="center">
+  <a href="https://www.npmjs.com/package/runcodejs"><img src="https://img.shields.io/npm/v/runcodejs" alt="Version"></a>
+  <a href="https://github.com/code-hemu/runcodejs/issues"><img src="https://img.shields.io/github/issues/code-hemu/runcodejs" alt="License"></a>
+  <a href="https://www.jsdelivr.com/package/npm/runcodejs"><img src="https://data.jsdelivr.com/v1/package/npm/runcodejs/badge?style=rounded" alt="jsDelivr"></a>
+  <a href="https://github.com/code-hemu/runcodejs/graphs/contributors"><img src="https://img.shields.io/github/contributors/code-hemu/runcodejs" alt="jsDelivr"></a>
+</p>
 ## Features
 
 - Live preview that updates as you type
