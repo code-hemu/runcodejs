@@ -10,10 +10,10 @@
 
 ## Features
 
+- Lightweight (18.5 KB kB only) and zero-dependency
 - Live preview that updates as you type
 - Separate editors for HTML, CSS, and JavaScript
 - Supports Browser CDN, ES Modules, and CommonJS environments
-- Lightweight (18.5 KB kB only) and zero-dependency
 - Customizable themes
 - Secure sandboxed iframe preview
 
