@@ -37,7 +37,7 @@ Controls the behavior of the live output iframe.
 | Option | Type | Default | Description |
 |---|---|---|---|
 | `live` | `boolean` | `true` | When `true`, the preview re-executes automatically as the user types. When `false`, the user must manually trigger execution via the Run button or the `runCode()` method. |
-| `debounce` | `number` | `300` | How long to wait (in milliseconds) after the last keystroke before the preview refreshes. Higher values reduce CPU usage on complex or long-running snippets; lower values feel more responsive for simple output. |
+| `debounce` | `number` | `1000` | How long to wait (in milliseconds) after the last keystroke before the preview refreshes. Higher values reduce CPU usage on complex or long-running snippets; lower values feel more responsive for simple output. |
 | `zoom` | `number` | `1` | Scales the preview iframe content using CSS `transform: scale()`. Supported values are `0.25`, `0.5`, and `1`. Useful when the preview renders at a larger intrinsic size than the container. |
 
 
