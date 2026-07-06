@@ -1,8 +1,6 @@
-# RunCode
-
-A lightweight HTML, CSS, and JavaScript playground with live preview. RunCode embeds a fully functional code editor directly into any webpage - no build tools, no backend, no configuration required. Write code, see results instantly.
-
----
+<p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-logo.png" width="72"></a></p>
+<h3 align="center">RunCode.js – embed a code editor directly into any webpage.</h3>
+<p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-demo.png" width="709"></a></p>
 
 ## Features
 
@@ -12,8 +10,6 @@ A lightweight HTML, CSS, and JavaScript playground with live preview. RunCode em
 - Lightweight and zero-dependency
 - Customizable themes
 - Secure sandboxed iframe preview
-
----
 
 ## Getting Started
 
@@ -81,8 +77,6 @@ new RunCode({
 });
 ```
 
----
-
 ## Configuration
 
 The `RunCode` constructor accepts a configuration object. At minimum, you need an `element` selector and a `code` object with at least one of `html`, `css`, or `js`.
@@ -100,7 +94,6 @@ new RunCode({
 
 All three code fields are optional - you can provide just `html`, just `js`, or any combination depending on your use case.
 
----
 
 ## Documentation
 
@@ -113,7 +106,6 @@ Detailed documentation is split into focused reference pages.
 - [Examples](https://github.com/code-hemu/runcodejs/blob/main/docs/examples/) - runnable code samples covering common use cases
 - [Changelog](https://github.com/code-hemu/runcodejs/blob/main/docs/changelog.md) - version history and release notes
 
----
 
 ## License
 
