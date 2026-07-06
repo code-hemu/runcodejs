@@ -1,0 +1,64 @@
+{
+  "name": "runcodejs",
+  "version": "0.1.0",
+  "description": "A lightweight HTML, CSS and JavaScript playground with live preview.",
+  "license": "MIT",
+  "author": "",
+  "homepage": "https://github.com/code-hemu/runcodejs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-hemu/runcodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/code-hemu/runcodejs/issues"
+  },
+  "keywords": [
+    "playground",
+    "editor",
+    "html",
+    "css",
+    "javascript",
+    "live-preview",
+    "code-editor"
+  ],
+  "type": "module",
+  "main": "./dist/runcode.cjs.js",
+  "browser": "./dist/runcode.js",
+  "module": "./dist/runcode.esm.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/runcode.min.js",
+  "jsdelivr": "./dist/runcode.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/runcode.esm.js",
+      "require": "./dist/runcode.cjs.js",
+      "default": "./dist/runcode.esm.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run clean && rollup -c",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rimraf": "^6.1.3",
+    "rollup": "^4.0.0",
+    "rollup-plugin-dts": "^6.2.3",
+    "typescript": "^5.8.0",
+    "vite": "^8.1.3"
+  }
+}

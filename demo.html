@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunCode Demo</title>
+</head>
+<body>
+
+  
+  <div class="demo-1"></div>
+
+
+  <div class="demo-2"></div>
+
+  <script type="module">
+    import RunCode from "./src/index.ts";
+
+    new RunCode({
+      element: ".demo-1",
+      code: {
+        html: '<h3>Normal execution (clickToLoad: false)</h3>\n<p>This runs immediately.</p>',
+        css: 'h3 { color: #38bdf8; }\np { color: #94a3b8; }',
+        js: 'console.log("Normal execution OK");'
+      }
+    });
+
+    new RunCode({
+      element: ".demo-2",
+      clickToLoad: true,
+      theme: 'light',
+      code: {
+        html: ' <h3>clickToLoad: true - static preview (no JS, no animations until click)</h3>\n<p>This has JS + CSS animation.</p>',
+        css: `h3 {
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+@keyframes pulse {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}`,
+        js: 'console.log("Now fully interactive!");'
+      }
+    });
+  </script>
+</body>
+</html>
