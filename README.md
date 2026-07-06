@@ -7,12 +7,13 @@
   <a href="https://www.jsdelivr.com/package/npm/runcodejs"><img src="https://data.jsdelivr.com/v1/package/npm/runcodejs/badge?style=rounded" alt="jsDelivr"></a>
   <a href="https://github.com/code-hemu/runcodejs/graphs/contributors"><img src="https://img.shields.io/github/contributors/code-hemu/runcodejs" alt="jsDelivr"></a>
 </p>
+
 ## Features
 
 - Live preview that updates as you type
 - Separate editors for HTML, CSS, and JavaScript
 - Supports Browser CDN, ES Modules, and CommonJS environments
-- Lightweight and zero-dependency
+- Lightweight (18.5 KB kB only) and zero-dependency
 - Customizable themes
 - Secure sandboxed iframe preview
 
