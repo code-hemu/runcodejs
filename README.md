@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-logo.png" width="150"></a></p>
+<p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-logo.png" width="200"></a></p>
 <h3 align="center">RunCode.js – embed a code editor directly into any webpage.</h3>
 <p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-demo.png" width="709"></a></p>
 <p align="center">
