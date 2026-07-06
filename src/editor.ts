@@ -84,20 +84,6 @@ export class Editor {
     }
   }
 
-  extractFromPrism(context: HTMLElement) {
-    const codeBlocks: Record<string, Element[]> = {
-      html: qsa('pre.language-markup code', context),
-      css: qsa('pre.language-css code', context),
-      js: qsa('pre.language-js code', context),
-    }
-    for (const lang of ['html', 'css', 'js']) {
-      for (const code of codeBlocks[lang]) {
-        this.textareas[lang].value += (code.textContent || '') + '\n'
-      }
-      this.updateLines(this.textareas[lang], this.lines[lang])
-    }
-  }
-
   show(lang: string) {
     qsa('.rc-panel', this.container).forEach(el => el.classList.remove('rc-active'))
     const editor = qs(`#rc-${lang}-${this.instanceId}`, this.container)

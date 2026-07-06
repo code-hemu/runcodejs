@@ -116,6 +116,7 @@ export default [
     input: "src/index.ts",
     output: {
       ...sharedOutputOptions,
+      exports: "default",
       file: "dist/runcode.cjs.js",
       format: "cjs",
     },

@@ -4,25 +4,52 @@ import { Tabs } from './tabs.js'
 import { Toolbar } from './toolbar.js'
 import { injectStyles, addThemeToStylesheet } from "./style.js";
 import { addTheme } from "./theme.js";
-import { qs, createElement } from './utils.js'
+import { qs, qsa, createElement, debounce } from './utils.js'
+
+type EditorTab = 'html' | 'css' | 'js';
 
 interface DefaultTabConfig {
-  editor?: string
+  editor?: EditorTab | null
   preview?: boolean
+}
+
+interface ExtractSourceItem {
+  selector: string | string[]
+  target?: string
+  position?: 'replace' | 'before' | 'after' | 'prepend' | 'append'
+}
+
+interface ExtractSource {
+  html?: ExtractSourceItem[]
+  css?: ExtractSourceItem[]
+  js?: ExtractSourceItem[]
+}
+
+interface ExtractConfig {
+  source: ExtractSource
+}
+
+interface PreviewConfig {
+  live?: boolean
+  debounce?: number
   zoom?: number
+}
+
+interface SecurityConfig {
+  network?: boolean
+  dialogs?: boolean
 }
 
 interface RunCodeOptions {
   element?: string | HTMLElement
   theme?: string
-  autoRun?: boolean
   clickToLoad?: boolean
-  extractCode?: boolean
   editable?: boolean
-  network?: boolean
-  dialogs?: boolean
+  security?: SecurityConfig
   defaultTab?: string | DefaultTabConfig
+  preview?: PreviewConfig
   code?: { html?: string; css?: string; js?: string }
+  extract?: ExtractConfig
 }
 
 export default class RunCode {
@@ -45,13 +72,11 @@ export default class RunCode {
     this.options = {
       element: '.rc-container',
       theme: 'dark',
-      autoRun: false,
       clickToLoad: false,
-      extractCode: false,
       editable: true,
-      network: false,
-      dialogs: true,
-      defaultTab: { editor: 'html', preview: true , zoom: 1},
+      security: { network: false, dialogs: false },
+      defaultTab: { editor: 'html', preview: true },
+      preview: { live: true, debounce: 1000, zoom: 1 },
       ...options
     }
 
@@ -106,6 +131,10 @@ export default class RunCode {
 
     this._switchToTab(this.options.defaultTab!)
 
+    if (this.options.extract) {
+      this.options.code = this._runExtract()
+    }
+
     if (this.options.code) {
       this.editor!.setCode(this.options.code)
       if (this.options.clickToLoad) {
@@ -116,9 +145,9 @@ export default class RunCode {
       }
     }
 
-    const cfg = typeof this.options.defaultTab === 'object' ? this.options.defaultTab : null
-    if (cfg?.zoom && cfg.zoom !== 1) {
-      this.toolbar!.setZoom(cfg.zoom)
+    const zoom = this.options.preview?.zoom
+    if (zoom && zoom !== 1) {
+      this.toolbar!.setZoom(zoom)
     }
 
     return this
@@ -129,11 +158,17 @@ export default class RunCode {
     addThemeToStylesheet(this.options.theme!)
     this.container!.classList.add('rc-theme-' + this.options.theme!)
 
-    this.editor = new Editor(this.root, this.options.editable!, () => {
-      if (this.options.autoRun) this._execute()
-    })
+    const onInput = debounce(() => {
+      if (this.options.preview?.live) this._execute()
+    }, this.options.preview?.debounce ?? 300)
 
-    this.preview = new Preview(this.root, this.options.network!, this.options.dialogs!)
+    this.editor = new Editor(this.root, this.options.editable!, onInput)
+
+    this.preview = new Preview(
+      this.root,
+      this.options.security!.network!,
+      this.options.security!.dialogs!
+    )
 
     this.tabs = new Tabs(this.root, this.editor, this.preview, (tab) => {
       if (tab === 'result') this._execute()
@@ -141,14 +176,9 @@ export default class RunCode {
 
     this.toolbar = new Toolbar(this.root, {
       clickToLoad: this.options.clickToLoad!,
-      extractCode: this.options.extractCode!,
       onRun: () => this._execute(),
       onRerun: () => this._execute(),
-      onZoom: (level) => this.preview!.setZoom(level),
-      onScrape: () => {
-        this.editor!.extractFromPrism(this.root)
-        this._execute()
-      }
+      onZoom: (level) => this.preview!.setZoom(level)
     })
 
     const editorContainer = createElement('div', { className: 'rc-workspace' })
@@ -173,6 +203,46 @@ export default class RunCode {
     this._execute()
   }
 
+  private _readContent(selector: string | string[]): string {
+    const selectors = Array.isArray(selector) ? selector : [selector]
+    return selectors.map(s => qs(s)?.textContent ?? '').join('\n')
+  }
+
+  private _assembleItems(items: ExtractSourceItem[]): string {
+    let result = ''
+    for (const item of items) {
+      const content = this._readContent(item.selector)
+      if (!item.target) {
+        result += content
+        continue
+      }
+      const target = item.target
+      switch (item.position ?? 'replace') {
+        case 'replace':
+          result = result.replace(target, content)
+          break
+        case 'before':
+        case 'append':
+          result = result.replace(target, content + '\n' + target)
+          break
+        case 'after':
+        case 'prepend':
+          result = result.replace(target, target + '\n' + content)
+          break
+      }
+    }
+    return result
+  }
+
+  private _runExtract(): { html: string; css: string; js: string } {
+    const source = this.options.extract!.source
+    return {
+      html: source.html ? this._assembleItems(source.html) : '',
+      css: source.css ? this._assembleItems(source.css) : '',
+      js: source.js ? this._assembleItems(source.js) : ''
+    }
+  }
+
   _switchToTab(tab: string | DefaultTabConfig) {
     if (typeof tab === 'string') {
       this.root.querySelectorAll(".rc-tab").forEach(el => {
@@ -183,28 +253,42 @@ export default class RunCode {
       })
       this.root.querySelector(".rc-editors")
         ?.classList.toggle("rc-active", tab !== "result")
+      if (tab !== "result") {
+        this.root.querySelector(".rc-editors")?.classList.remove("rc-full")
+      }
       this.root.querySelector(".rc-preview")
         ?.classList.toggle("rc-active", tab === "result")
-      this.root.querySelector(".rc-preview")
-        ?.classList.remove("rc-hidden")
+
       return
     }
 
-    const editorTab = tab.editor || 'html'
-    const showPreview = tab.preview !== false
+    const editorTab = tab.editor === undefined ? 'html' : tab.editor;
+    const showPreview = tab.preview !== false;
+    const onlyShowPreview = !editorTab && showPreview;
 
     this.root.querySelectorAll(".rc-tab").forEach(el => {
-      el.classList.toggle("rc-active", (el as HTMLElement).dataset.tab === editorTab)
+      const tabName = (el as HTMLElement).dataset.tab;
+
+      const active =
+        onlyShowPreview
+          ? tabName === "result"
+          : editorTab !== null && tabName === editorTab;
+
+      el.classList.toggle("rc-active", active);
+    });
+
+    this.root.querySelectorAll(".rc-panel").forEach(el => {
+      el.classList.toggle("rc-active", editorTab !== null && (el as HTMLElement).dataset.lang === editorTab)
     })
-      this.root.querySelectorAll(".rc-panel").forEach(el => {
-        el.classList.toggle("rc-active", (el as HTMLElement).dataset.lang === editorTab)
-      })
     this.root.querySelector(".rc-editors")
-      ?.classList.add("rc-active")
-    this.root.querySelector(".rc-preview")
-      ?.classList.toggle("rc-hidden", !showPreview)
+      ?.classList.toggle("rc-active", editorTab !== null)
     this.root.querySelector(".rc-editors")
       ?.classList.toggle("rc-full", !showPreview)
+
+    this.root.querySelector(".rc-editors")
+        ?.classList.toggle("rc-active", !onlyShowPreview)
+      this.root.querySelector(".rc-preview")
+        ?.classList.toggle("rc-active", onlyShowPreview)
   }
 
   destroy() {

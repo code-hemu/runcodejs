@@ -63,10 +63,7 @@ export class Preview {
   private _buildCSP(): string {
     if (this.network) return ""
 
-    return `
-    <meta http-equiv="Content-Security-Policy"
-      content="connect-src 'none';">
-  `
+    return `<meta http-equiv="Content-Security-Policy" content="connect-src 'none';">`
   }
 
   execCode({ html, css, js }: { html: string; css: string; js: string }) {
@@ -74,22 +71,9 @@ export class Preview {
 
     const jsOverride = this.dialogs
       ? js
-      : `
-        window.alert = () => {};
-        window.confirm = () => false;
-        window.prompt = () => null;
+      : `window.alert = () => {};window.confirm = () => false;window.prompt = () => null;${js}`;
 
-        ${js}
-      `;
-
-    this.iframe.srcdoc = `
-    ${csp}
-    ${html}
-    <style>${css}</style>
-    <script>
-      ${jsOverride}
-    <\/script>
-  `;
+    this.iframe.srcdoc = `${csp}${html}<style>${css}</style><script>${jsOverride}<\/script>`;
   }
 
   setZoom(level: number) {

@@ -1,9 +1,9 @@
 {
   "name": "runcodejs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A lightweight HTML, CSS and JavaScript playground with live preview.",
   "license": "MIT",
-  "author": "",
+  "author": "Hemanta Gayen",
   "homepage": "https://github.com/code-hemu/runcodejs#readme",
   "repository": {
     "type": "git",

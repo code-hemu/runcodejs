@@ -1,61 +1,120 @@
-# coderun
+# RunCode
 
-A lightweight HTML, CSS and JavaScript playground with live preview.
+A lightweight HTML, CSS, and JavaScript playground with live preview. RunCode embeds a fully functional code editor directly into any webpage - no build tools, no backend, no configuration required. Write code, see results instantly.
 
-## Install
+---
 
-```bash
-npm install coderun
-```
+## Features
 
-## Usage
+- Live preview that updates as you type
+- Separate editors for HTML, CSS, and JavaScript
+- Supports Browser CDN, ES Modules, and CommonJS environments
+- Lightweight and zero-dependency
+- Customizable themes
+- Secure sandboxed iframe preview
 
-```html
-<div class="codehemu-editer"></div>
+---
 
-<script type="module">
-import RunCode from 'coderun';
+## Getting Started
 
-const editor = new RunCode({
-  element: '.codehemu-editer',
-  theme: 'light',
-  autoRun: true,
-  zoom: 1
-});
-</script>
-```
+Choose the installation method that fits your project setup.
+
+### Browser (CDN)
+
+The simplest way to use RunCode. Drop the script tag into any HTML page - no build step needed. The library is loaded directly from a CDN and attaches to any element matching the selector you provide.
 
 ```html
-<!-- CDN -->
-<script src="https://unpkg.com/coderun/dist/runcode.min.js"></script>
+<div class="editor"></div>
+
+<script src="https://unpkg.com/runcodejs"></script>
 <script>
 const editor = new RunCode({
-  element: '.codehemu-editer',
-  theme: 'light',
-  autoRun: true
+  element: '.editor',
+  code: {
+    html: '<h1>Hello World</h1>',
+    css: 'h1 { color: #38bdf8; }',
+    js: 'console.log("ready");'
+  }
 });
 </script>
 ```
 
-## Options
+### ES Modules
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `element` | string/Element | `'.codehemu-editer'` | CSS selector or DOM element |
-| `theme` | string | `'light'` | `'light'` or `'dark'` |
-| `autoRun` | boolean | `true` | Auto-execute code on input |
-| `zoom` | number | `1` | Default zoom level (`0.25`, `0.5`, `1`) |
-| `extractCode` | boolean | `false` | Enable Prism.js code block scraping |
+For modern JavaScript projects using native ES module syntax. Install via npm, then import RunCode directly into your module. Works out of the box with bundlers like Vite, Rollup, and webpack.
 
-## API
+```bash
+npm install runcodejs
+```
+
+```html
+<div class="editor"></div>
+
+<script type="module">
+import RunCode from 'runcodejs';
+
+new RunCode({
+  element: '.editor',
+  code: {
+    html: '<h1>Hello World</h1>',
+    css: 'h1 { color: #38bdf8; }',
+    js: 'console.log("ready");'
+  }
+});
+</script>
+```
+
+### CommonJS
+
+For Node.js-based environments or older bundler setups that rely on `require()`. Fully compatible with tools like Browserify or older webpack configurations.
 
 ```js
-const editor = new RunCode(options)
+const RunCode = require('runcodejs');
 
-editor.init()              // Initialize the playground
-editor.runCode()           // Manually execute code
-editor.setTheme('dark')    // Switch theme
+new RunCode({
+  element: '.editor',
+  code: {
+    html: '<h1>Hello World</h1>',
+    css: 'h1 { color: #38bdf8; }',
+    js: 'console.log("ready");'
+  }
+});
 ```
+
+---
+
+## Configuration
+
+The `RunCode` constructor accepts a configuration object. At minimum, you need an `element` selector and a `code` object with at least one of `html`, `css`, or `js`.
+
+```js
+new RunCode({
+  element: '.editor',   // CSS selector or DOM element to mount into
+  code: {
+    html: '...',        // Initial HTML content
+    css: '...',         // Initial CSS content
+    js: '...'           // Initial JavaScript content
+  }
+});
+```
+
+All three code fields are optional - you can provide just `html`, just `js`, or any combination depending on your use case.
+
+---
+
+## Documentation
+
+Detailed documentation is split into focused reference pages.
+
+- [API Reference](https://github.com/code-hemu/runcodejs/blob/main/docs/api.md) - complete list of constructor options, instance methods, and TypeScript types
+- [Extract](https://github.com/code-hemu/runcodejs/blob/main/docs/extract.md) - how to pull initial code content from existing DOM elements instead of passing it inline
+- [Security](https://github.com/code-hemu/runcodejs/blob/main/docs/security.md) - details on the sandboxed iframe, network access controls, and dialog restrictions
+- [Themes](https://github.com/code-hemu/runcodejs/blob/main/docs/themes.md) - applying built-in themes and creating your own custom editor theme
+- [Examples](https://github.com/code-hemu/runcodejs/blob/main/docs/examples/) - runnable code samples covering common use cases
+- [Changelog](https://github.com/code-hemu/runcodejs/blob/main/docs/changelog.md) - version history and release notes
+
+---
 
 ## License
 
+RunCode is licensed under **MIT**. Copyright © [Hemanta Gayen](https://github.com/hemanta-gayen).

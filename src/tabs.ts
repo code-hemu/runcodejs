@@ -44,6 +44,7 @@ export class Tabs {
     resultPanel.classList.toggle('rc-active', tab === 'result')
 
     if (tab !== 'result') {
+      editorPanel.classList.remove('rc-full')
       this.editor.show(tab)
     }
 

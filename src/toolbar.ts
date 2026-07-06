@@ -2,42 +2,41 @@ import { qs, qsa, createElement } from './utils.js'
 
 interface ToolbarOptions {
   clickToLoad: boolean
-  extractCode: boolean
   onRun: () => void
   onRerun: () => void
   onZoom: (level: number) => void
-  onScrape: () => void
 }
 
 export class Toolbar {
   container: HTMLElement
   clickToLoad: boolean
-  extractCode: boolean
   onRun: () => void
   onRerun: () => void
   onZoom: (level: number) => void
-  onScrape: () => void
   wrapper: HTMLDivElement | null
   footer: HTMLDivElement
 
-  constructor(container: HTMLElement, { clickToLoad, extractCode, onRun, onRerun, onZoom, onScrape }: ToolbarOptions) {
+  constructor(container: HTMLElement, { clickToLoad, onRun, onRerun, onZoom }: ToolbarOptions) {
     this.container = container
     this.clickToLoad = clickToLoad
-    this.extractCode = extractCode
     this.onRun = onRun
     this.onRerun = onRerun
     this.onZoom = onZoom
-    this.onScrape = onScrape
     this.wrapper = null
     this._build()
   }
 
   _build() {
-    if(this.clickToLoad){
+    if (this.clickToLoad) {
       const wrapper = createElement('div', { className: 'rc-load-overlay' })
       const runBtn = createElement('button', {
         className: 'rc-run-btn',
-        onClick: () => this._handleScrape()
+        onClick: () => {
+          if (this.wrapper?.parentNode) {
+            this.wrapper.parentNode.removeChild(this.wrapper)
+          }
+          this.onRun()
+        }
       }, 'Run Code')
 
       wrapper.appendChild(runBtn)
@@ -94,13 +93,6 @@ export class Toolbar {
     })
 
     this.footer = footer as HTMLDivElement
-  }
-
-  _handleScrape() {
-    if (this.wrapper && this.wrapper.parentNode) {
-      this.wrapper.parentNode.removeChild(this.wrapper);
-    }
-    this.extractCode ? this.onScrape() : this.onRun();
   }
 
   setZoom(level: number) {

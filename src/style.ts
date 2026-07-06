@@ -257,13 +257,6 @@ const stylesheet: StyleNode[] = [
   },
   {
     type: "rule",
-    selector: ".rc-preview.rc-hidden",
-    declarations: {
-      display: "none"
-    }
-  },
-  {
-    type: "rule",
     selector: ".rc-editors.rc-full",
     declarations: {
       width: "100%"
