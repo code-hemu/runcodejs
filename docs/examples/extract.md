@@ -90,7 +90,7 @@ The three position strategies and their behavior:
 
 ## Array Selector
 
-The `selector` field also accepts an array of CSS selectors. All matched elements are extracted in order and concatenated before being applied to the target. This allows multiple independent snippets to be merged into a single insertion point without needing a separate entry for each one.
+The `selector` field also accepts an array of CSS selectors. All elements matching **each** selector are extracted in order and concatenated before being applied to the target. This means a single selector like `"pre.language-css code"` collects content from **every** matching `<code>` element, not just the first one. An array of selectors lets you merge multiple independent snippets into a single insertion point without needing a separate entry for each one.
 
 ```html
 <pre id="part-a"><code>Part A</code></pre>

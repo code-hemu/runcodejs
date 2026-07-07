@@ -205,7 +205,7 @@ export default class RunCode {
 
   private _readContent(selector: string | string[]): string {
     const selectors = Array.isArray(selector) ? selector : [selector]
-    return selectors.map(s => qs(s)?.textContent ?? '').join('\n')
+    return selectors.flatMap(s => qsa(s).map(el => el.textContent ?? '')).join('\n')
   }
 
   private _assembleItems(items: ExtractSourceItem[]): string {

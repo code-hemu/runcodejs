@@ -49,14 +49,16 @@ insertion is made relative to the target string.
 If `position` is omitted, `replace` is used by default.
 
 
-### Array Selector
+### Multiple Selectors & Multiple Matches
 
 The `selector` field accepts either a single CSS selector string or an array of selector
-strings. When an array is given, all matching elements are read in order and their contents
-are joined with newlines before the result is applied to the target.
+strings. All elements matching **each** selector are read in order and their contents are
+joined with newlines before the result is applied to the target. This means a selector like
+`"pre.language-markup code"` will collect content from **every** matching `<code>` element,
+not just the first one.
 
-This lets you combine multiple separate fragments - such as a header, main content, and footer -
-into a single insertion step.
+Passing an array of selectors lets you combine multiple separate fragments — such as a header,
+main content, and footer — into a single insertion step.
 
 ```js
 {
