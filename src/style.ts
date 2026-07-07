@@ -438,7 +438,9 @@ const stylesheet: StyleNode[] = [
         selector: '.rc-frame',
         declarations: {
           width: '100%',
-          height: '100%'
+          height: '100%',
+          minWidth: 'unset !important',
+          maxWidth: 'none !important'
         }
       }
     ]

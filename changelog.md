@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.0
+
+- Added `minWidth: 'unset !important'` and `maxWidth: 'none !important'` to responsive `.rc-frame` (`max-width:600px`) to prevent iframe size constraints on small screens
+
 ## 0.4.0
 
 - Fixed `_readContent` to collect content from all matching DOM elements per selector (was using `querySelector` instead of `querySelectorAll`)
