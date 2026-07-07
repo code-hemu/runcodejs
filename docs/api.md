@@ -59,6 +59,7 @@ Instance methods available on an initialized RunCode playground object.
 |---|---|
 | `init()` | Bootstraps the playground - builds the DOM, attaches event listeners, and renders the initial preview. Called automatically on instantiation; only call this manually if you destroyed and need to re-initialize the same instance. |
 | `runCode()` | Programmatically triggers a full code execution cycle, refreshing the preview with the current editor contents. Use this when `live` is set to `false` or when you need to force a re-run from outside the editor. |
+| `setCode(code)` | Replaces the editor contents with the provided code object (`{ html?, css?, js? }`). Any omitted keys are left unchanged. Useful for programmatically updating the editor after initialization, e.g. after an extract assembly or user interaction. |
 | `setTheme(name)` | Switches the active theme at runtime without re-initializing the playground. Accepts any built-in theme name or the name of a custom theme previously registered with `RunCode.defineTheme()`. |
 | `destroy()` | Fully tears down the playground instance - removes all DOM nodes injected by RunCode, unbinds event listeners, and releases internal references. Call this before removing the container element or navigating away in a single-page app. |
 

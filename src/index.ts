@@ -203,6 +203,10 @@ export default class RunCode {
     this._execute()
   }
 
+  setCode(code: { html?: string; css?: string; js?: string }) {
+    this.editor?.setCode(code)
+  }
+
   private _readContent(selector: string | string[]): string {
     const selectors = Array.isArray(selector) ? selector : [selector]
     return selectors.flatMap(s => qsa(s).map(el => el.textContent ?? '')).join('\n')

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.0
+
+- Exposed `setCode()` as a public method on the `RunCode` instance for programmatic code updates
+
 ## 0.5.0
 
 - Added `minWidth: 'unset !important'` and `maxWidth: 'none !important'` to responsive `.rc-frame` (`max-width:600px`) to prevent iframe size constraints on small screens
