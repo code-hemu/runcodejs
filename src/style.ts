@@ -35,7 +35,7 @@ const stylesheet: StyleNode[] = [
       width: 'auto',
       aspectRatio: 'auto',
       height: '90vh',
-      margin: '20px 0',
+      margin: '10px 0',
       position: 'relative',
       overflow: 'hidden',
       fontFamily: 'sans-serif',
