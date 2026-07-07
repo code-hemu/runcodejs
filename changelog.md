@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.0
+
+- Style consistency: single-quote refactor across `src/style.ts`
+- Fixed line-height inheritance in container
+- Improved editor width flexibility (`auto` instead of `100%`)
+- Enforced `text-decoration: none` on brand link
+
 ## 0.2.0
 
 - Initial release
