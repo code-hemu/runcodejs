@@ -35,6 +35,14 @@
   <pre id="footer"><code>&lt;footer&gt;Site Footer&lt;/footer&gt;</code></pre>
   <div class="demo-3"></div>
 
+  <h2>4. Extract - Multiple Matches</h2>
+
+  <pre class="language-markup"><code>&lt;h1&gt;Collected from first match&lt;/h1&gt;</code></pre>
+  <pre class="language-markup"><code>&lt;p&gt;Collected from second match&lt;/p&gt;</code></pre>
+  <pre class="language-markup"><code>&lt;footer&gt;Collected from third match&lt;/footer&gt;</code></pre>
+
+  <div class="demo-4"></div>
+
   <script type="module">
     import RunCode from "./src/index.ts";
 
@@ -80,6 +88,15 @@
             { selector: ["#header", "#content", "#footer"], target: "<!-- app -->", position: "replace" },
             { selector: "#scripts", target: "</body>", position: "before" }
           ]
+        }
+      }
+    });
+
+    new RunCode({
+      element: ".demo-4",
+      extract: {
+        source: {
+          html: [{ selector: "pre.language-markup code" }]
         }
       }
     });
