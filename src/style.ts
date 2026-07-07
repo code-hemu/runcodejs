@@ -136,6 +136,13 @@ const stylesheet: StyleNode[] = [
   },
   {
     type: 'rule',
+    selector: '.rc-editors.rc-active',
+    declarations: {
+      display: 'flex'
+    }
+  },
+  {
+    type: 'rule',
     selector: '.rc-panel',
     declarations: {
       display: 'none',
@@ -254,6 +261,13 @@ const stylesheet: StyleNode[] = [
       flex: '1',
       background: 'var(--rc-bg)',
       transition: 'transform 0.3s'
+    }
+  },
+  {
+    type: 'rule',
+    selector: '.rc-preview.rc-active',
+    declarations: {
+      display: 'block'
     }
   },
   {
@@ -406,9 +420,16 @@ const stylesheet: StyleNode[] = [
       },
       {
         type: 'rule',
-        selector: '.rc-editors.rc-active, .rc-preview.rc-active',
+        selector: '.rc-editors.rc-active',
         declarations: {
           display: 'flex'
+        }
+      },
+      {
+        type: 'rule',
+        selector: '.rc-preview.rc-active',
+        declarations: {
+          display: 'block'
         }
       },
       {
