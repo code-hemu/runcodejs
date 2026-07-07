@@ -269,6 +269,8 @@ const stylesheet: StyleNode[] = [
     declarations: {
       width: '100%',
       height: '100%',
+      minWidth: 'unset !important',
+      maxWidth: 'none !important',
       border: 'none',
       overflow: 'auto',
       transformOrigin: '0 0',
