@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.0
+
+- Fixed `_readContent` to collect content from all matching DOM elements per selector (was using `querySelector` instead of `querySelectorAll`)
+
 ## 0.3.0
 
 - Style consistency: single-quote refactor across `src/style.ts`
