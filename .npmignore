@@ -9,6 +9,7 @@ coverage/
 scripts/
 examples/
 resources/
+playground/
 test-results/
 playwright-report/
 

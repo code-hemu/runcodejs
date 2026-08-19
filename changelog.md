@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.0
+
+- Added `setTheme()` support for any built-in or custom theme at runtime (previously only the initial theme's styles were injected)
+- Added `setup()` public method to re-arm the `clickToLoad` "Run Code" overlay with the current code, enabling on-demand re-execution
+- Refactored click-to-load overlay into reusable `arm()`/`disarm()` toolbar methods
+- Rebuilt `playground/` as a CodeJar-style hero demo (Vite-based) with theme switcher, localStorage persistence, and a "Reset setup" button
+
 ## 0.6.0
 
 - Exposed `setCode()` as a public method on the `RunCode` instance for programmatic code updates
