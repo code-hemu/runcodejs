@@ -1,5 +1,8 @@
 <p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-logo.png" width="200"></a></p>
 <h3 align="center">RunCode.js – embed a code editor directly into any webpage.</h3>
+<p align="center">
+  Try the <a href="https://code-hemu.github.io/runcodejs/">RunCodeJS Playground</a> to write, test, and run HTML, CSS, and JavaScript directly in your browser. Experiment with your code, make changes, run them instantly, and see the results in the live preview. No setup, no installation, just write your code and see it come to life.
+</p>
 <p align="center"><a href="https://github.com/code-hemu/runcodejs"><img src="https://raw.githubusercontent.com/code-hemu/runcode/refs/heads/main/resources/runcode-demo.png" width="709"></a></p>
 <p align="center">
   <a href="https://www.npmjs.com/package/runcodejs"><img src="https://img.shields.io/npm/v/runcodejs" alt="Version"></a>
