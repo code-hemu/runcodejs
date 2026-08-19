@@ -27,22 +27,7 @@ export class Toolbar {
   }
 
   _build() {
-    if (this.clickToLoad) {
-      const wrapper = createElement('div', { className: 'rc-load-overlay' })
-      const runBtn = createElement('button', {
-        className: 'rc-run-btn',
-        onClick: () => {
-          if (this.wrapper?.parentNode) {
-            this.wrapper.parentNode.removeChild(this.wrapper)
-          }
-          this.onRun()
-        }
-      }, 'Run Code')
-
-      wrapper.appendChild(runBtn)
-
-      this.wrapper = wrapper as HTMLDivElement
-    }
+    this.wrapper = this.clickToLoad ? this.arm() : null
 
     const footer = createElement('div', { className: 'rc-footer' })
 
@@ -98,6 +83,31 @@ export class Toolbar {
   setZoom(level: number) {
     const scale = String(level).replace('.', '')
     this._setZoom(scale)
+  }
+
+  arm(): HTMLDivElement | null {
+    if (!this.clickToLoad) return null
+    this.disarm()
+
+    const wrapper = createElement('div', { className: 'rc-load-overlay' })
+    const runBtn = createElement('button', {
+      className: 'rc-run-btn',
+      onClick: () => {
+        this.disarm()
+        this.onRun()
+      }
+    }, 'Run Code')
+
+    wrapper.appendChild(runBtn)
+    this.wrapper = wrapper as HTMLDivElement
+    return this.wrapper
+  }
+
+  disarm() {
+    if (this.wrapper && this.wrapper.parentNode) {
+      this.wrapper.parentNode.removeChild(this.wrapper)
+    }
+    this.wrapper = null
   }
 
   _setZoom(scale: string) {

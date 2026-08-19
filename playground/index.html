@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunCode.js — Playground</title>
+  <link rel="icon" type="image/png" href="/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #f6f8f8;
+      font-family: "Inter", system-ui, -apple-system, sans-serif;
+      color: #1a1a2e;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
+
+    .brand img {
+      height: 2.25rem;
+    }
+
+    .brand .name {
+      color: #542064;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: #555;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .nav a:hover {
+      background: #eceff0;
+      color: #1a1a2e;
+    }
+
+    .nav .github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #24292f;
+      color: #fff;
+    }
+
+    .nav .github:hover {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      color: #555;
+      margin-top: 0.6rem;
+      font-size: 1.05rem;
+    }
+
+    .chips {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+
+    .chip {
+      background: #fff;
+      border: 1px solid #e2e6e8;
+      border-radius: 999px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #444;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+
+    .themes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .themes .label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #666;
+      margin-right: 0.25rem;
+    }
+
+    .theme-btn {
+      border: 1px solid #d5dade;
+      background: #fff;
+      color: #333;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      border-color: #542064;
+      color: #542064;
+    }
+
+    .theme-btn.active {
+      background: #542064;
+      border-color: #542064;
+      color: #fff;
+    }
+
+    .themes .sep {
+      width: 1px;
+      height: 1.4em;
+      background: #d5dade;
+      margin: 0 0.25rem;
+    }
+
+    /* .playground {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+        0 1px 5px 0 rgba(0, 0, 0, 0.12),
+        0 3px 1px -2px rgba(0, 0, 0, 0.2);
+    } */
+
+    .hint {
+      margin-top: 1.25rem;
+      text-align: center;
+      color: #888;
+      font-size: 0.8rem;
+    }
+
+    .hint code {
+      background: #ecedef;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-family: "Source Code Pro", Consolas, monospace;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e6e8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: #888;
+      font-size: 0.85rem;
+    }
+
+    footer nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer nav a {
+      color: #555;
+      text-decoration: none;
+    }
+
+    footer nav a:hover {
+      color: #542064;
+    }
+
+    .copyright{
+      text-decoration: none;
+      color: #000;
+    }
+
+    @media (max-width: 640px) {
+      main { padding-top: 1.5rem; }
+      .hero h1 { font-size: 1.5rem; }
+      header { justify-content: center; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <a class="brand" href="https://github.com/code-hemu/runcodejs">
+        <img src="/runcode-icon.png" alt="RunCode.js logo" height="36" />
+        <span class="name">RunCode.js</span>
+      </a>
+      <nav class="nav">
+        <a href="https://github.com/code-hemu/runcodejs/blob/main/docs/api.md">API</a>
+        <a href="https://github.com/code-hemu/runcodejs/blob/main/docs/security.md">Security</a>
+        <a href="https://github.com/code-hemu/runcodejs/blob/main/docs/themes.md">Themes</a>
+        <a class="github" href="https://github.com/code-hemu/runcodejs">
+          <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+          </svg>
+          Star on GitHub
+        </a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <img src="/runcode-logo.png" alt="RunCode.js logo" height="60" />
+      <p>An embeddable HTML, CSS &amp; JavaScript playground with a live preview.</p>
+      <div class="chips">
+        <span class="chip">19 kB</span>
+        <span class="chip">Zero dependencies</span>
+        <span class="chip">Sandboxed preview</span>
+        <span class="chip">Live preview</span>
+      </div>
+    </section>
+
+    <div class="themes">
+      <span class="label">Theme</span>
+      <button class="theme-btn" data-theme="dracula">Dracula</button>
+      <button class="theme-btn" data-theme="dark">Dark</button>
+      <button class="theme-btn" data-theme="light">Light</button>
+      <button class="theme-btn" data-theme="nord">Nord</button>
+      <button class="theme-btn" data-theme="monokai">Monokai</button>
+      <span class="sep"></span>
+      <button class="theme-btn setup-btn">Reset setup</button>
+    </div>
+
+    <div class="playground">
+      <div class="rc-container"></div>
+    </div>
+
+    <p class="hint">Your edits are saved locally. Try the <code>Run</code> button and the <code>zoom</code> controls in the preview toolbar.</p>
+
+    <footer>
+      <span>© <a class="copyright" href="https://www.codehemu.in/">CodeHemu</a> · MIT License</span>
+      <nav>
+        <a href="https://github.com/code-hemu/runcodejs">Repository</a>
+        <a href="https://www.npmjs.com/package/runcodejs">npm</a>
+        <a href="https://github.com/code-hemu/runcodejs/blob/main/changelog.md">Changelog</a>
+      </nav>
+    </footer>
+  </main>
+
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>

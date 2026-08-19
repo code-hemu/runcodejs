@@ -203,6 +203,21 @@ export default class RunCode {
     this._execute()
   }
 
+  setup(): this {
+    if (!this.options.clickToLoad || !this.toolbar || !this.preview) return this
+
+    const wrapper = this.toolbar.arm()
+    if (wrapper) {
+      this.preview.panel.appendChild(wrapper)
+    }
+
+    const code = this.editor?.getCode()
+    if (code) {
+      this.preview.renderStatic(code.html, code.css)
+    }
+    return this
+  }
+
   setCode(code: { html?: string; css?: string; js?: string }) {
     this.editor?.setCode(code)
   }
@@ -312,6 +327,7 @@ export default class RunCode {
   setTheme(theme: string) {
     const prev = this.options.theme
     this.options.theme = theme
+    addThemeToStylesheet(theme)
     if (this.container) {
       this.container.classList.replace('rc-theme-' + prev, 'rc-theme-' + theme)
     }

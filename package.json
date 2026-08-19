@@ -45,6 +45,8 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run clean && rollup -c",
+    "playground": "vite playground",
+    "playground:build": "vite build playground",
     "clean": "remove-item dist -r -f",
     "prepublishOnly": "npm run build"
   },
