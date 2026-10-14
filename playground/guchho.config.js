@@ -6,6 +6,6 @@ export default {
     minify: false,
     pretty: true,
     minifyHtml: false,
-    define: { __HOMEPAGE__: '"https://code-hemu.github.io/runcodejs/"' }
+    define: { __HOMEPAGE__: '"https://runcode.js.org/"' }
   },
 };
