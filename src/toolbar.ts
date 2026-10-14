@@ -37,7 +37,7 @@ export class Toolbar {
 
     const brandLink = createElement('a', {
       className: 'rc-brand-link',
-      href: '__HOMEPAGE__',
+      href: __HOMEPAGE__,
       target: '_blank',
       rel: 'noopener',
       title: 'Edit on RunCode'
