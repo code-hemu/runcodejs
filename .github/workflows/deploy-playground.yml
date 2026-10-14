@@ -38,8 +38,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build playground
+      - name: Build playground with Guchho
         run: npm run playground:build
+
+      - name: Verify build output
+        shell: bash
+        run: |
+          if [ ! -d playground/dist ]; then
+            echo "::error::Guchho build did not create playground/dist"
+            echo "Available playground files:"
+            ls -la playground
+            exit 1
+          fi
+
+          if [ ! -f playground/dist/index.html ]; then
+            echo "::error::playground/dist/index.html is missing"
+            echo "Generated files:"
+            find playground/dist -maxdepth 3 -type f -print
+            exit 1
+          fi
+
+          echo "Build output verified successfully."
+          find playground/dist -maxdepth 2 -type f -print
 
       - name: Skip Jekyll processing
         run: touch playground/dist/.nojekyll
