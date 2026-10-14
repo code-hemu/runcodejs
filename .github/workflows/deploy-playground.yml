@@ -40,7 +40,6 @@ jobs:
 
       - name: Build playground
         run: npm run playground:build
-        working-directory: playground
 
       - name: Skip Jekyll processing
         run: touch playground/dist/.nojekyll
