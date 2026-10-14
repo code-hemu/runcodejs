@@ -39,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Build playground
-        run: npx guchho build
+        run: npm run playground:build
         working-directory: playground
 
       - name: Skip Jekyll processing
