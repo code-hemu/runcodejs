@@ -1,5 +1,7 @@
 import { qs, qsa, createElement } from './utils.js'
 
+declare const __HOMEPAGE__: string;
+
 interface ToolbarOptions {
   clickToLoad: boolean
   onRun: () => void
