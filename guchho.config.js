@@ -31,14 +31,14 @@ export default [
       format: "esm",
       exports: "named",
       minify: false
-      
     },
     plugins: [
       longBanner,
       dts({
         entry: "src/index.ts",
         outfile: "dist/index.d.ts",
-        respectExternal: true
+        respectExternal: true,
+        compilerOptions: { declaration: true }
       })
     ]
   },
