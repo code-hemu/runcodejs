@@ -44,7 +44,7 @@
   "sideEffects": false,
   "scripts": {
     "dev": "cd playground && guchho dev --open",
-    "build": "guchho build --tsconfig=tsconfig.json",
+    "build": "guchho build",
     "playground:build": "cd playground && guchho build",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run build"
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@guchho/banner": "^0.1.4",
-    "@guchho/dts": "^0.1.0",
+    "@guchho/dts": "^0.2.0",
     "@typescript/typescript6": "^6.0.2",
     "guchho": "^1.0.6",
     "typescript": "^7.0.2"
