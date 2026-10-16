@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -41,20 +41,17 @@ jobs:
       - name: Build playground
         run: npx guchho build
         working-directory: playground
-        shell: pwsh
 
       - name: Verify build output
         run: |
-          if (!(Test-Path "playground/dist")) {
-            Write-Error "Guchho build did not create playground/dist"
-            Get-ChildItem -Force playground
+          if [ ! -d "playground/dist" ]; then
+            echo "Guchho build did not create playground/dist" >&2
+            ls -la playground
             exit 1
-          }
-        shell: pwsh
+          fi
 
       - name: Skip Jekyll processing
-        run: New-Item -Path "playground/dist/.nojekyll" -ItemType File -Force
-        shell: pwsh
+        run: touch playground/dist/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -63,7 +60,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     environment:
       name: github-pages
