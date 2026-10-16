@@ -56,10 +56,10 @@
     "@guchho/banner": "^0.1.4",
     "@guchho/dts": "^0.2.0",
     "@typescript/typescript6": "^6.0.2",
-    "guchho": "^1.0.6",
+    "guchho": "^1.0.7",
     "typescript": "^7.0.2"
   },
   "allowScripts": {
-    "guchho@1.0.6": true
+    "guchho@1.0.7": true
   }
 }
